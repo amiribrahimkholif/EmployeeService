@@ -1,3 +1,4 @@
+using EmployeeService.Data;
 using EmployeeService.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace EmployeeService
         {
 
             services.AddControllers();
+            services.AddScoped<IEmployeeRepository, EmployeeRepo>();
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeServiceDB"))); 
             services.AddSwaggerGen(c =>
@@ -49,7 +51,6 @@ namespace EmployeeService
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();

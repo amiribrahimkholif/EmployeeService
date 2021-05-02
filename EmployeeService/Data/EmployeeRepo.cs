@@ -29,7 +29,7 @@ namespace EmployeeService.Data
         }
 
         //Add an employee
-        public void AddEmployee(Employee employee)
+        public void AddEmployee([FromBody]Employee employee)
         {
 
             _context.Employee.Add(employee);
@@ -37,7 +37,7 @@ namespace EmployeeService.Data
         }
 
         //update an employee
-        public bool UpdateEmployee(int id, Employee employee)
+        public bool UpdateEmployee(int id,[FromBody] Employee employee)
         {
 
             if (id != employee.Id)
@@ -48,8 +48,9 @@ namespace EmployeeService.Data
             {
                 _context.Employee.Update(employee);
                 _context.SaveChanges();
+                return true;
             }
-            return true;
+            
         }
         //Delete an employee by id
         public bool DeleteEmployee(int id)
@@ -63,8 +64,9 @@ namespace EmployeeService.Data
             {
                 _context.Employee.Remove(employee);
                 _context.SaveChanges();
+                return true;
             }
-            return true;
+            
 
         }
     }
