@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EmployeeService.Data
@@ -25,7 +26,8 @@ namespace EmployeeService.Data
         //Get employee By id
         public Employee GetEmployeeById(int id)
         {
-            return _context.Employee.Find(id);
+           return _context.Employee.FirstOrDefault(e => e.Id == id);
+
         }
 
         //Add an employee
@@ -55,7 +57,7 @@ namespace EmployeeService.Data
         //Delete an employee by id
         public bool DeleteEmployee(int id)
         {
-            var employee = _context.Employee.Find(id);
+            var employee = _context.Employee.FirstOrDefault(e => e.Id == id);
             if (employee == null)
             {
                 return false;
